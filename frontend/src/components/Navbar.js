@@ -8,7 +8,7 @@ function Navbar() {
         <img src={logo} />
         <ul className='nav-menu'>
             <a href="/signup"><li>SignUp</li></a>
-            <a href="/signin"><li>SignUp</li></a>
+            <a href="/signin"><li>SignIn</li></a>
             <a href="/profile"><li>Profile</li></a>
         </ul>
     </div>

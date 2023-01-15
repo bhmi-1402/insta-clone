@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Montserrat;
 }
 
 .form{
@@ -12,6 +13,7 @@
     padding: 30px;
     border: 1px solid rgb(129, 121, 121);
     border-radius: 1px;
+    font-family: Montserrat;
     
     
 }
@@ -53,6 +55,7 @@ input{
     width: 80%;
     cursor: pointer;
     margin-top: 8px;
+    font-family: Montserrat;
 }
 
 .form2{

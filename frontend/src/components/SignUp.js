@@ -1,16 +1,39 @@
-import { Types } from 'mongoose';
-import React,{useEffect,useState} from 'react'
+// import { Types } from 'mongoose';
+import React,{useState} from 'react'
 import logo from '../img/logo.png';
 import './Signup.css'
 
+import {Link,useNavigate} from "react-router-dom"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function SignUp() {
+  const navigate = useNavigate()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("")
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
+
+
+const notifyA=(msg)=>toast.error(msg)
+
+const notifyB=(msg)=>toast.success(msg)
+
+const emailRegex=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
 const postData=()=>{
+
+  if(!emailRegex.test(email)){
+    notifyA("invalid email")
+    // console.log("true")
+    return
+  }
+  else if(!passRegex.test(password)){
+    notifyA("Password must contain at least 8 characters, including at least 1 number and 1 includes both lower and uppercase letters and special characters for example #,?,!")
+    return
+  }
   fetch("http://localhost:5000/signup",{
-    methode:"post",
+    method:"post",
     headers:{
       "Content-Type":"application/json"
     },
@@ -23,7 +46,17 @@ const postData=()=>{
     })
   })
   .then(res=>res.json())
-  .then(data=>{console.log(data)})
+  .then(data=>{
+    if(data.error){
+      notifyA(data.error);
+    }
+     else {
+      notifyB(data.message);
+    navigate("/signin")
+    }
+    console.log(data)
+    
+    })
 }
   return (
     <div className='signUp'>
@@ -37,14 +70,14 @@ const postData=()=>{
                 <input type="email" name="email" id="email" value={email} placeholder="Email" onChange={(e)=>{setEmail(e.target.value) }} />
             </div>
             <div>
-                <input type="text" name="text" id="fullname" value={name} onChange={((e) => { setName(e.target.value) })} placeholder="fullname" />
+                <input type="text" name="text" id="fullname" value={name}  placeholder="fullname" onChange={((e) => { setName(e.target.value) })}/>
             </div>
             <div>
-                <input type="text" name="text" id="username" placeholder="username" value={userName}
+                <input type="text" name="text" id="username" value={userName}  placeholder="username"
               onChange={(e) => { setUserName(e.target.value) }} />
             </div>
             <div>
-                <input type="password" name="password" id="password" placeholder="password" value={password}
+                <input type="password" name="password" id="password" value={password}  placeholder="password"
               onChange={(e) => { setPassword(e.target.value) }}/>
             </div>
             <p
@@ -56,6 +89,12 @@ const postData=()=>{
           </p>
           <input type="submit" id="submit-btn" value="Sign Up" onClick={(e)=>{postData()}} />
             </div>
+            <div className="form2">
+          Already have an account ?
+          <Link to="/signin">
+            <span style={{ color: "blue", cursor: "pointer" }}>Sign In</span>
+          </Link>
+        </div>
             
         </div>
         </div>

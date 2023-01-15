@@ -1,10 +1,12 @@
 const express = require('express');
 const app=express();
+
+const PORT=process.env.port||5000;
+const mongoose  = require('mongoose');
+const atlasUrl=require('./keys');
+
 const cors=require('cors')
 app.use(cors())
-const PORT=process.env.port||5000;
-const atlasUrl=require('./keys');
-const mongoose  = require('mongoose');
 require('./models/models');
 app.use(express.json());
 app.use(require('./routes/auth'));

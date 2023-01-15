@@ -13,7 +13,7 @@ router.post("/signup",(req,res)=>{
     // res.json(req.body.name);
     const {name,userName,email,password}=req.body;
     if(!name||!email||!userName||!password){
-        res.status(422).json({error:"Please add all the fields"})
+       return res.status(422).json({error:"Please add all the fields"})
     }
    
     USER.findOne({$or:[{email:email},{username:userName}]}).then((savedUser)=>{
@@ -21,14 +21,14 @@ router.post("/signup",(req,res)=>{
             return res.status(422).json({error:"user already exist with that email or username"})
         }
         bcrypt.hash(password,12).then((hashedPassword)=>{
-        const user=new USER({
+         const user=new USER({
             name,
             email,
             userName,
-            password:hashedPassword
+            password: hashedPassword
         })
         user.save()
-        .then(user => {res.json({message:"saved"})})
+        .then(user => {res.json({message:"Registered successfully"}) })
         .catch(err => {console.log(err)})
     })
 })

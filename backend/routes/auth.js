@@ -16,7 +16,7 @@ router.post("/signup",(req,res)=>{
        return res.status(422).json({error:"Please add all the fields"})
     }
    
-    USER.findOne({$or:[{email:email},{username:userName}]}).then((savedUser)=>{
+    USER.findOne({email:email}).then((savedUser)=>{
         if(savedUser){
             return res.status(422).json({error:"user already exist with that email or username"})
         }

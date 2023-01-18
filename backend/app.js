@@ -3,7 +3,7 @@ const app=express();
 
 const PORT=process.env.port||5000;
 const mongoose  = require('mongoose');
-const atlasUrl=require('./keys');
+const {atlasUrl}=require('./keys');
 
 const cors=require('cors')
 app.use(cors())

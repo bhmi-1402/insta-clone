@@ -2,18 +2,17 @@ const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose')
 const USER =mongoose.model("USER");
-
 const bcrypt=require('bcrypt')
 const jwt=require("jsonwebtoken")
 const {Jwt_secret}=require("../keys")
-const requireLogin=require("../middlewares/requireLogin");
+// const requireLogin = require("../middlewares/requireLogin");
 
 router.get("/",(req,res)=>{
     res.send("hello");
 })
-router.get("/createPost",requireLogin,(req,res)=>{
-console.log("hello nj ");
-})
+// router.get("/createPost",requireLogin,(req,res)=>{
+// console.log("hello nj ");
+// })
 
 router.post("/signup",(req,res)=>{
     // res.json(req.body.name);

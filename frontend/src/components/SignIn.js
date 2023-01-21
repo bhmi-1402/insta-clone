@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import "./SignIn.css";
 import logo from "../img/logo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -41,11 +41,12 @@ export default function SignIn() {
         } else {
           notifyB("Signed In Successfully")
           console.log(data)
-          // localStorage.setItem("jwt", data.token)
+          localStorage.setItem("jwt", data)
+          navigate("/")
           // localStorage.setItem("user", JSON.stringify(data.user))
 
           // setUserLogin(true)
-          navigate("/")
+         
         }
         console.log(data)
       })

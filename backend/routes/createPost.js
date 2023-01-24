@@ -29,4 +29,7 @@ router.post("/createPost",requireLogin,(req,res)=>{
     }).catch(err=>console.log(err))
     // res.json("ok");
 })
+router.get("/myposts",requireLogin,(req,res)=>{
+    console.log(req.user)
+})
 module.exports=router
